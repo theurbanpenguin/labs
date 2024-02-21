@@ -1,0 +1,20 @@
+#!/bin/bash
+declare -l who=$1
+count=$#
+declare -l args=$@
+
+create_user(){
+  echo "Creating user $1"
+  grep -q "^${1}:" /etc/passwd || sudo user add -m -s /bin/bash $1
+  echo "${1}:Password123?" | sudo chpasswd
+  tail -n1 /etc/passwd
+}
+
+if [ count -lt 1 ]; then
+  read -p 'Enter a name: ' who
+  create_user $who
+else
+  for arg in $args ; do
+    create_user $arg
+  done
+fi
