@@ -5,7 +5,7 @@ declare -l args=$@
 
 create_user(){
   echo "Creating user $1"
-  grep -q "^${1}:" /etc/passwd || sudo user add -m -s /bin/bash $1
+  grep -q "^${1}:" /etc/passwd || sudo useradd -m -s /bin/bash $1
   echo "${1}:Password123?" | sudo chpasswd
   tail -n1 /etc/passwd
 }
