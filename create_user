@@ -10,7 +10,7 @@ create_user(){
   tail -n1 /etc/passwd
 }
 
-if [ count -lt 1 ]; then
+if [ $count -lt 1 ]; then
   read -p 'Enter a name: ' who
   create_user $who
 else
